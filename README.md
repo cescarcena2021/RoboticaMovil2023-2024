@@ -32,6 +32,18 @@ Por tanto, se me ocurrió que en vez de un PID angular y otro lineal, podía hac
 Una vez tuve terminada toda la parte de código, tocaba ajustar velocidad y valores de PID. Estos tenían que ser lo suficientemente altos para permitir ir al coche a mayor velocidad y ser lo suficientemente seguros como para que el coche no chocara en ninguna curva cerrada o chicane. Además, estos valores tenían que ser robustos en cualquier tipo de circuito, no debían ser solo útiles en el circuito Simple.
 Por ello, tras muchas pruebas en diferentes circuitos, el compromiso entre velocidad y seguridad que he encontrado ha sido:
 
+| Circuito      | Velocidad 4.3 | Velocidad 4 |
+| ------------- | ------------- | ------------|
+| Simple  | 153s  |       165s      |
+| Montmelo  | Failed  |    305         |
+| Montreal  | Failed |  Die in chican|
+| Nürburgring|  268 |  268 |
+
+Circuito simple -> 135s
+Montmelo -> 
+Montreal ->
+Nürburgring ->
+
 ### Objetivo cumplido ‼️​
 
 ![image](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/d26031de-3822-4127-af6b-03fe0f97fb87)

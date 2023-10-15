@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 
 # Parámetros del controlador PID angular
-Kp_angular = 1
+Kp_angular = 1.2
 Ki_angular = 0.0001
 Kd_angular = 2.7
 
@@ -48,14 +48,14 @@ def calculate_pid_lineal(error):
     global error_integral_lineal
     global error_prev_lineal
     
-    # Calcula los términos PID inversos
+    # Calcula los términos PID
     P = Kp_lineal * error
 
     error_integral_lineal += error
     I = -Ki_lineal * error_integral_lineal
     D = -Kd_lineal * (error - error_prev_lineal)
 
-    # Calcula la salida del controlador PID inverso
+    # Calcula la salida del controlador PID 
     output = P + I + D
 
     # Actualiza el error previo para la próxima iteración
@@ -63,18 +63,19 @@ def calculate_pid_lineal(error):
 
     return output
 
+y1 = 200
+y2 = 270
+
+y3 = 300
+y4 = 350
+
+curva_vel = 4
+recta_vel = 10
+
 
 while True:
-    # Enter iterative code!
-    v = 5
     img = HAL.getImage()
     height, width, channel = img.shape
-
-    y1 = 200
-    y2 = 270
-    
-    y3 = 300
-    y4 = 350
     
     franja_seleccionada = img[y1:y2, :]
     franja_seleccionada2 = img[y3:y4, :]
@@ -94,39 +95,36 @@ while True:
     # detect the color of line
     res1 = cv2.inRange(blur1, lower_red, upper_red)
     res2 = cv2.inRange(blur2, lower_red, upper_red)
-    # d = cv.dilate(res, kernel=keneral, iterations=D_iter)
-    # e = cv.erode(d, kernel=keneral, iterations=E_iter)
 
     # caculate the center of the line
     m1 = cv2.moments(res1)
     if m1['m00'] > 0:
       cx1 = int(m1['m10']/m1['m00'])
       cy1 = int(m1['m01']/m1['m00'])
+      cv2.circle(franja_seleccionada,(cx1,cy1),5,(255,0,0),-1)
+      error_lineal = -(cx1 - width/2)/300
 
     m2 = cv2.moments(res2)
     if m2['m00'] > 0:
       cx2 = int(m2['m10']/m2['m00'])
       cy2 = int(m2['m01']/m2['m00'])
+      cv2.circle(franja_seleccionada2,(cx2,cy2),10,(255,0,0),-1)
+      error_angular = -(cx2 - width/2)/300
+      
+    else:
+      error_angular = error_angular * 1.03
 
-    cv2.circle(franja_seleccionada,(cx1,cy1),5,(255,0,0),-1)
-    cv2.circle(franja_seleccionada2,(cx2,cy2),10,(255,0,0),-1)
-    
-    # position PID control
-    error_angular = -(cx2 - width/2)/300
-    error_lineal = -(cx1 - width/2)/300
-    
-    print(error_lineal)
 
     umbral_curva = 0.07
     
     if(abs(error_lineal) > umbral_curva):
-      print("entra")
       w = calculate_pid_angular(error_angular)
-      v = 4.3
+      v = curva_vel
       
     else:
+
       w = calculate_pid_lineal(error_lineal)
-      v = 10
+      v = recta_vel
         
     HAL.setW(w)
     HAL.setV(v)

@@ -36,7 +36,7 @@ Por ello, tras muchas pruebas en diferentes circuitos, el compromiso entre veloc
 | ------------- | ------------- | ------------|
 | Simple  | 153s  |       165s      |
 | Montmelo  | Failed  |    305         |
-| Montreal  | Failed |  Die in chican|
+| Montreal  | Failed | Muere en la chican|
 | Nürburgring|  268 |  268 |
 
 Circuito simple -> 135s

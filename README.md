@@ -1,7 +1,7 @@
-# Visual Follow Line 🏎️​
+# Obstacle Avoidance 🏎️​
 
 ## Objetivo 🎯
-El objetivo de este ejercicio es realizar un control reactivo PID capaz de seguir la línea pintada en el circuito de carreras.
+El objetivo de esta practica es consegir que nuestro coche de formula 1 se capaz de navegar por la pista. Consiguiendio esquivar los obstaculos y alcanzados los destinos marcados.
 
 ## Navegacion VFF​
 Para esta practica usaremos una tecnica de navegacion conocida como VFF .La idea detrás de est tecnica es crear un mapa local del entorno del robot y utilizarlo para generar un campo de vectores que indica la dirección en la que el robot debe moverse para evitar obstáculos y alcanzar su destino. Aquí hay un resumen de cómo funciona:

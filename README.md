@@ -1,18 +1,20 @@
-# Visual Follow Line 🏎️​
+# Obstacle Avoidance 🏎️​
 
 ## Objetivo 🎯
-El objetivo de este ejercicio es realizar un control reactivo PID capaz de seguir la línea pintada en el circuito de carreras.
+El objetivo de esta practica es consegir que nuestro coche de formula 1 se capaz de navegar por la pista. Consiguiendio esquivar los obstaculos y alcanzados los destinos marcados.
 
-## Percepción 👁️​
-Para que el coche sea capaz de seguir una línea, primero tiene que tener información de en qué lugar se encuentra esta. Por ello, la primera aproximación a la práctica fue centrarse en la visión del coche y de qué forma detectaba la línea. El coche, como único sensor, posee una cámara incorporada en el chasis que nos permite ver en primera persona por dónde estamos yendo.
-La primera idea que se me ocurrió fue hacer un filtro de color con OpenCV para que de toda la imagen solo lo importante fuera la línea roja. Una vez conseguido eso, el siguiente paso era detectar cuán lejos estaba la línea de la posición en la que estaba el coche, así que se me ocurrió utilizar el momento del polígono pintado por el filtro de color. El momento me daba el centro de este polígono, entonces podría saber si estoy muy desviado o poco desviado del centro de la línea. Todo funcionaba de forma correcta hasta que comenzaba a subir la velocidad en las curvas. A más de 5 de velocidad era imposible corregir la curva, y tras varios intentos me di cuenta de que donde el coche estaba tomando la referencia de la línea era demasiado cerca, por tanto era incapaz de reaccionar a las curvas hasta que nos estaba completamente dentro de ellas.
-![image](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/338d2326-f0fe-47ff-b2f2-cd1cbb2291f2)
+## Navegacion VFF​
+Para esta practica usaremos una tecnica de navegacion conocida como VFF .La idea detrás de est tecnica es crear un mapa local del entorno del robot y utilizarlo para generar un campo de vectores que indica la dirección en la que el robot debe moverse para evitar obstáculos y alcanzar su destino. Aquí hay un resumen de cómo funciona:
+
+**Mapeo**: El robot utiliza sensores, como cámaras, láseres o ultrasonidos, para recopilar información sobre su entorno inmediato. A partir de estos datos, se construye un mapa local que representa la ubicación de obstáculos, paredes y otros objetos cercanos al robot.
+
+**Generación del campo de vectores**: Se crea un campo de vectores en el que cada punto en el mapa local tiene un vector asociado. Este vector indica la dirección en la que el robot debe moverse desde ese punto para llegar a su destino y evitar obstáculos. Los vectores se generan de manera que el robot sea atraído hacia su objetivo y repelido por los obstáculos.
+
+**Navegación**: El robot sigue los vectores del campo de vectores para navegar de manera autónoma. A medida que el robot se mueve, el campo de vectores se actualiza en función de los datos de los sensores, lo que le permite reaccionar a obstáculos en tiempo real y ajustar su ruta.
+
+![image](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/88da9e3c-4542-41d4-a2f8-ddcd1c8df03b)
 
 
-### Doble percepción 👀
-
-Lo que se me ocurrió fue dividir la imagen para conseguir dos polígonos y sacar dos momentos, uno más próximo al coche y otro más lejano a él, de tal forma que el lejano fuera capaz de detectar curvas antes de estar dentro de ellas y el cercano fuera capaz de detectar la desviación de la línea cerca del coche.
-![image](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/12707cfc-a8a9-43d6-85c8-5af499e22025)
 
 ## Un único PID
 

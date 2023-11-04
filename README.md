@@ -15,12 +15,24 @@ Para esta practica usaremos una tecnica de navegacion conocida como VFF .La idea
 ![image](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/88da9e3c-4542-41d4-a2f8-ddcd1c8df03b)
 
 
+## Calculo de furzas
 
-## Un único PID
+**Fuerza repusiva** 
+``` python3
+def get_repulsive_force(parse_laser):
+    laser = parse_laser
+    
+    laser_vectorized = []
+    for dist, angle in laser:
+      
+        x = 1/dist * math.cos(angle) * -1
+        y = 1/dist * math.sin(angle) * -1
 
-Al comenzar la práctica, como dice el enunciado, hay que implementar un PID, así que una vez logré la parte de percepción implementé un PID que controlará la velocidad angular del coche y le permitirá girar cuando lo necesite. Esto funcionaba de manera correcta pero no era óptimo, ya que no tenía ningún sentido ir a la misma velocidad en curvas que en rectas. Por tanto, decidí aplicar ese mismo PID a la velocidad lineal. Todo fue catastrófico y rápidamente me di cuenta de que necesitaba dos PID distintos.
-
-![image](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/a0f9499f-8832-4f7f-b1b7-a6710cb4afcc)
+        v = (x,y)
+        laser_vectorized += [v]
+    laser_mean = np.mean(laser_vectorized, axis=0)
+    return laser_mean
+```
 
 
 ## PID para curvas y PID para rectas

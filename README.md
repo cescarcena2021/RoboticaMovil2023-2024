@@ -2,7 +2,7 @@
 
 ## Info
 
-Cada ptractica tiene una rama asociada donde se puede ver todo
+Cada practica tiene una rama asociada donde estan las memorias 
   
 
 

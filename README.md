@@ -17,6 +17,15 @@ Para esta practica usaremos una tecnica de navegacion conocida como VFF .La idea
 
 ## Calculo de furzas
 
+Como hemos comentado antes para esta tecnica es necesario calular el conjunto de furzas. En primer lugar, para calcular el vector de los objetivos, simplemete llamamos a la funcion **GUI.map.getNextTarget()** y lo modificmaos de tal forma que obtenemos su componente x y su pomponete y .Ademas de ello usando la funcion **absolute2relative** proporcionada en el enunciado consegiomos obtener las coordenadas del target en forma relativa al coche. Luego simplemente caculamos el vector y lo reducimos en un rango para que este no sea muy grande.
+```python3
+    # Vector del target en verde
+    car_vect = [max(min(target_rel_x, 3.5), -3.5), max(min(target_rel_y, 3.2), -3.2)]
+    # Vector de repulsion en rojo
+    obs_vect = [get_repulsive_force(laser)[0], get_repulsive_force(laser)[1]]
+    # Vector resultante en negro
+    avg_vector = [(car_vect[0]+obs_vect[0]), (car_vect[1] + obs_vect[1])]
+```
 **Fuerza repusiva** 
 ``` python3
 def get_repulsive_force(parse_laser):

@@ -57,3 +57,4 @@ Para caluclar la resultante simplemente hay que hacer la suma de las furzas en a
 
 
 
+

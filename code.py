@@ -45,9 +45,6 @@ def get_repulsive_force(parse_laser):
     laser_mean = np.mean(laser_vectorized, axis=0)
     return laser_mean
 
-def distance(x, y):
-    return math.sqrt(abs(x)*2 + abs(y)*2)
-
 while True:
     # Enter iterative code!
     image=HAL.getImage()
@@ -62,7 +59,6 @@ while True:
     target_abs_y = currentTarget.getPose().y
     #----------------------------------------------
     absolute_target = target_abs_x, target_abs_y
-    #print(("target relative Position "),target_abs_x ,target_abs_y)
     #----------------------------------------------
     # Obtener la posición y orientación del robot
     robot_x = HAL.getPose3d().x
@@ -79,20 +75,12 @@ while True:
     # average direction defined in a black line
     avg_vector = [(car_vect[0]+obs_vect[0]), (car_vect[1] + obs_vect[1]) *0.3]
 
-    
-    #obstacle_distance = distance(relative_target[0], relative_target[1])
 
     tan = math.tan(avg_vector[1]/avg_vector[0])
 
     if (target_rel_x < 2 and target_rel_y < 2):
         currentTarget.setReached(True)
-        
-    #print("Tangente:", tan)
-    #print("Distancia al punto", obstacle_distance)
-
-    GUI.showLocalTarget(relative_target)
-
-    GUI.showForces(car_vect, obs_vect, avg_vector)
+  
     
     if(avg_vector[0] < 0):
         #turnig state
@@ -100,12 +88,11 @@ while True:
         HAL.setV(1)
         
     else:
-        if avg_vector[0] > 4:
-            avg_vector[0] = 4
-          
+         
         HAL.setW(tan * 2)
         HAL.setV(avg_vector[0])
         
-    print("Vel:",avg_vector)
     GUI.showImage(image)
+    GUI.showLocalTarget(relative_target)
+    GUI.showForces(car_vect, obs_vect, avg_vector)
     

@@ -66,11 +66,7 @@ Para que todo este sistema de navegacion funcione, no todas las fuerzas pueden t
 Como podemos observar el vector atracion es en el que no modifico los valores mientras que sí lo hago en los vectores de repulsion y total para compensar este primero.
 
 ## Demostracion 
-
-[Screencast from 11-05-2023 10:31:26 AM.webm](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/cacf8a2b-1c7a-4679-a77a-376b11827fd8)
-
-
-
+[Screencast from 11-05-2023 10:37:26 AM.webm](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/090dc551-e854-4f27-8e56-6429c90ef65d)
 
 
 

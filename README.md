@@ -65,6 +65,18 @@ Para que todo este sistema de navegacion funcione, no todas las fuerzas pueden t
 
 Como podemos observar el vector atracion es en el que no modifico los valores mientras que sí lo hago en los vectores de repulsion y total para compensar este primero.
 
+## Como llegar a los objetivos
+Una vez tenemos hechos todos los calculos de las fuerzas hay que comandar las velocidades al coche. Para ello usamos la componentes x e y del vector total. Y para calcular la velocidad lineal usamos la tangente de la componete x e y. 
+```python
+        tan = math.tan(avg_vector[1]/avg_vector[0]
+        ....
+
+        HAL.setW(tan * 2)
+        HAL.setV(avg_vector[0])
+```
+
+
+
 ## Demostracion 
 [Screencast from 11-05-2023 10:37:26 AM.webm](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/090dc551-e854-4f27-8e56-6429c90ef65d)
 

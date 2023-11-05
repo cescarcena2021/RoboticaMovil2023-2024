@@ -85,4 +85,4 @@ HAL.setV(avg_vector[0])
 
 ## Demostración
 
-Screencast from 11-05-2023 10:37:26 AM.webm
+[Screencast from 11-05-2023 10:37:26 AM.webm](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/090dc551-e854-4f27-8e56-6429c90ef65d)

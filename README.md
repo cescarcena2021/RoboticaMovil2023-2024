@@ -56,11 +56,14 @@ Para caluclar la resultante simplemente hay que hacer la suma de las furzas en a
 
 ## Reparto de fuerzas
 Para que todo este sistema de navegacion funcione, no todas las fuerzas pueden tener la misma importancia. Por ejemplo, como es logico, la fuerza que atrae a nuestro coche al obejetivo. tiene que ser mayor. Esto es debido a que si las fuerzas fueran de igual intensidad, el coche seria muy **miedoso** y rara vez alcanzara el objetivio. Por otro lado tampoco hay que pasarse ya que si esta fuerza ni tienen la importancia que debe, el coche sera muy poco cuidadoso y en ocasiones chocara con los obstaculos. Por ello los valores con los que he concluido que el coche es no se choca y alcanza los objetivos son:
-|       | X | Y|
+
+| Multiplicadores | X | Y|
 | ------------- | ------------- | ------------|
 | Vector atracion  | x1  |       x1      |
 | Vector repulsion  | x3  |    x8         |
 | Vector total  | x1 | x0.3 |
+
+Como podemos observar el vector atracion es en el que no modifico los valores mientras que sí lo hago en los vectores de repulsion y total para compensar este primero.
 
 
 

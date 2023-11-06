@@ -22,8 +22,8 @@ Para esta práctica, usaremos una técnica de navegación conocida como VFF. La 
 Como hemos comentado antes, para esta técnica es necesario calcular el conjunto de fuerzas. En primer lugar, para calcular el vector de los objetivos, simplemente llamamos a la función **GUI.map.getNextTarget()** y lo modificamos de tal forma que obtenemos su componente x y su componente y. Además de ello, usando la función **absolute2relative** proporcionada en el enunciado, conseguimos obtener las coordenadas del objetivo en forma relativa al coche. Luego simplemente calculamos el vector y lo reducimos en un rango para que no sea muy grande.
 
 ```python
-# Vector del objetivo en verde
-car_vect = [max(min(target_rel_x, 3.5), -3.5), max(min(target_rel_y, 3.2), -3.2)]
+# Car direction defined in a green vector
+atractive_vector = [max(min(relative_x, 3.5), -3.5), max(min(relative_y, 3.2), -3.2)]
 ```
 ### Fuerza repulsiva 🟥
 
@@ -31,33 +31,32 @@ Para calcular el vector de repulsión es algo más complejo, puesto que hay que 
 
 ```python
 
-# Vector de repulsión en rojo
-obs_vect = [get_repulsive_force(laser)[0], get_repulsive_force(laser)[1]]
+# Obstacle direction defined in a red vector
+repulsive_vector = [get_repulsive_force(laser)[0] * 3, get_repulsive_force(laser)[1] * 8]
 ```
 ```python
 
 def get_repulsive_force(parse_laser):
-    laser = parse_laser
 
-    laser_vectorizado = []
-    for dist, angle in laser:
+    laser_array = []
+    for distance, angle in parse_laser:
+      
+        x = 1/distance * math.cos(angle) * -1
+        y = 1/distance * math.sin(angle) * -1
+        v = (x,y)
 
-        x = 1/dist * math.cos(angle) * -1
-        y = 1/dist * math.sin(angle) * -1
-
-        v = (x, y)
-        laser_vectorizado += [v]
-    laser_media = np.mean(laser_vectorizado, axis=0)
-    return laser_media
+        laser_array += [v]
+    laser_mean = np.mean(laser_array, axis=0)
+    return laser_mean
 ```
 ### Fuerza resultante ⬛
 
 Para calcular la resultante, simplemente hay que sumar las fuerzas en ambas componentes.
 
 ```python
+# Average direction defined in a black line
+total_vector = [(atractive_vector[0] + repulsive_vector[0]), (atractive_vector[1] + repulsive_vector[1]) * 0.3]
 
-# Vector resultante en negro
-avg_vector = [(car_vect[0] + obs_vect[0]), (car_vect[1] + obs_vect[1)]
 ```
 
 ## Reparto de fuerzas ⚖️
@@ -76,11 +75,9 @@ Cómo llegar a los objetivos
 Una vez que hemos hecho todos los cálculos de las fuerzas, debemos comandar las velocidades del coche. Para ello, usamos las componentes x e y del vector total. Y para calcular la velocidad lineal, usamos la tangente de la componente x e y.
 
 ```python
-
-tan = math.tan(avg_vector[1] / avg_vector[0])
-#--------------#
-HAL.setW(tan * 2)
-HAL.setV(avg_vector[0])
+        w_vel = math.tan(total_vector[1]/total_vector[0])
+        HAL.setW(w_vel * 2)
+        HAL.setV(total_vector[0])
 ```
 
 ## Demostración

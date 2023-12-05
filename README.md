@@ -30,7 +30,10 @@ Una vez ya tenemos el path la navegacion es realivamente sencilla. La tecnica qu
 
 ## Demostración
 
-[Screencast from 11-05-2023 10:37:26 AM.webm](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/090dc551-e854-4f27-8e56-6429c90ef65d)
+[Screencast from 12-05-2023 09:02:56 PM.webm](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/102d6ba1-21a8-4548-b4cd-e60d66f37102)
+
+
+
 
   
 

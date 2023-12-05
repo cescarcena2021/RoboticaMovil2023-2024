@@ -205,7 +205,9 @@ def expand_obstacles(obstacle_list, expansion_range, map_shape):
 
 ## Demostración 🚕​
 
-[Screencast from 12-05-2023 09:02:56 PM.webm](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/102d6ba1-21a8-4548-b4cd-e60d66f37102)
+Video en velocidad x2
+
+[Screencast from 12-05-2023 09:02:56 PM.webm](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/91bbc672-0a10-45b6-9de3-03116194d867)
 
 
 

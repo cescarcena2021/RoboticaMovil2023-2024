@@ -1,22 +1,23 @@
 # Global Navigation 🏎️
 
-## Objetivo 🎯
+# Objetivo 🎯
 El objetivo de esta práctica es implementar la lógica de un algoritmo de Gradient Path Planning (GPP). La navegación global a través de GPP consta de:
 
-* Seleccionado un destino, el algoritmo de GPP es responsable de encontrar la ruta más corta hacia él, evitando, en el caso de esta práctica, todo lo que no sea carretera.
-* Una vez seleccionada la ruta, se debe implementar la lógica necesaria para seguir esta ruta y alcanzar el objetivo en el robot.
+Seleccionado un destino, el algoritmo de GPP es responsable de encontrar la ruta más corta hacia él, evitando, en el caso de esta práctica, todo lo que no sea carretera.
+Una vez seleccionada la ruta, se debe implementar la lógica necesaria para seguir esta ruta y alcanzar el objetivo en el robot.
 
-## Gradient Path Planning ⚜️​
-Para esta práctica, usaremos una técnica de navegación global conocida como Gradient Path Planning. La idea detrás de esta técnica es crear un mapa dividido en celdas a la cuales se les asignara un peso en funcion de lo lejos o de lo cerca que esten del coche. De esta forma consegimos un gradiente parecido al de la imagen, siendo el pinto mas alto el coche, y el pinto mas bajo el objetivo
+# Gradient Path Planning ⚜️​
+Para esta práctica, usaremos una técnica de navegación global conocida como Gradient Path Planning. La idea detrás de esta técnica es crear un mapa dividido en celdas a las cuales se les asignará un peso en función de lo lejos o de lo cerca que estén del coche. De esta forma conseguimos un gradiente parecido al de la imagen, siendo el punto más alto el coche, y el punto más bajo el objetivo.
 
 ![image](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/d12ba1b4-56cc-4fb9-83d8-cd307dbe7556)
 
-Pero a esto hay que añadirle un complicacion, ya que en la vida real, el mundo no es plano. Existen multidud de obtaculos que un coche no puede atrabesar, y es lo que pasa en este caso con las paredes del mapa. Estas paredes necesitan  tener un coste muy grande en el gradiente para evitar que el coche las atraviese. De tal forma que el gradiente que ya teniamos, mas el reajuste de costes a las paredes, deberia quedar algo asi:
+Pero a esto hay que añadirle una complicación, ya que en la vida real, el mundo no es plano. Existen multitud de obstáculos que un coche no puede atravesar, y es lo que pasa en este caso con las paredes del mapa. Estas paredes necesitan tener un coste muy grande en el gradiente para evitar que el coche las atraviese. De tal forma que el gradiente que ya teníamos, más el reajuste de costes a las paredes, debería quedar algo así:
 
 ![image](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/0b64c1c4-d7ff-4cbf-8928-75cb07185fd9)
 
-## Algoritmo de busqueda 🔍
-Como algoritmo de busqueda en este caso he suado A*(A estrella) que es uno de los mas potentes junto a dijkstra. Lo que hace my algoritmo es:
+## Algoritmo de búsqueda 🔍
+Como algoritmo de búsqueda en este caso, he usado A* (A estrella), que es uno de los más potentes junto a Dijkstra. Lo que hace mi algoritmo es:
+
 *Inicialización:
 El bucle while priority_queue: indica que continuará hasta que la cola de prioridad esté vacía.
 cost, current = heapq.heappop(priority_queue): Extrae el nodo con el menor costo actual de la cola de prioridad.
@@ -74,7 +75,7 @@ while priority_queue:
             cost_map[vecino] = current
 ```
 
-Para la obtencion de los vecinos he reciclado una funcion que hemos usado en la asigantura de Inteligencia Artificial. Esta funcion toma las posibles direciones en las que puede ir el coche y las añade en una lista como vecinos. Tube que añadir un *if* para el caso de las casillas de los extremos ya que estas no podian tener vecinos en una direcion, yque etan al borde del mapa. El uso de esto es muy semejante a en Inteligencia Artificial ya que en este caso viscamos los vecinos de un taxi y en el caso de IA era las posibles siguientes casillas de Pacman.
+Para la obtención de los vecinos, he reciclado una función que hemos utilizado en la asignatura de Inteligencia Artificial. Esta función toma las posibles direcciones en las que puede ir el coche y las añade a una lista como vecinos. Tuve que agregar un if para el caso de las casillas en los extremos, ya que estas no podían tener vecinos en una dirección, al estar al borde del mapa. El uso de esto es muy similar al de Inteligencia Artificial, ya que en este caso buscamos los vecinos de un taxi, mientras que en el caso de IA eran las posibles siguientes casillas para Pacman.
 
 ```python
 def get_neighbors(current, map):
@@ -95,8 +96,8 @@ def get_neighbors(current, map):
     return vecinos
 ```
 
-## Obtencion del camino 👌​
-Parsaber por donde tenemos que ir es muy sencillo una vez tenemos el gradiente, ya que simplemente hay que escoger el camino mas corto posible. En este caso se puede ver como el camino claramente es la linea verde.
+## Obtención del camino 👌​
+Para saber por dónde tenemos que ir, es muy sencillo una vez tenemos el gradiente, ya que simplemente hay que escoger el camino más corto posible. En este caso, se puede ver cómo el camino claramente es la línea verde
 
 ![image](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/ae50a680-49a0-4284-8d03-a9927b7cbc66)
 
@@ -120,9 +121,9 @@ def get_path(start, target, cost_map):
 
 ## Navegación 🛥️​
 
-Una vez ya tenemos el path la navegacion es realivamente sencilla. La tecnica que he usado a sido ir recorriendo el path punto por punto para ir de uno a otro, es decir, voy del punto A al punto B y cuando ya estoy en B voy al C y asi sucesibamente hasta llegar al objetivio. Para ir de un punto a otro, primero me he centrado en la orientacion. 
+Una vez que tenemos el camino, la navegación es relativamente sencilla. La técnica que he usado ha sido recorrer el camino punto por punto, es decir, voy del punto A al punto B, y cuando ya estoy en B, voy al C y así sucesivamente hasta llegar al objetivo. Para ir de un punto a otro, primero me he centrado en la orientación.
 
-* **Orientacion**: Para abrodar el tema de la orientacion he usado la arcontangente que relaciona el angulo del coche respecto del siguiente punto. Y una vez sabiendo ese error, simplemete se va corrigiendo poco a poco hasta que este error sea practicamete inexistente. Cuando estatmos perfectamenete alineados con el punto ya podemos ir hacia el.
+* **Orientación**: Para abordar el tema de la orientación, he utilizado la arcotangente que relaciona el ángulo del coche respecto al siguiente punto. Y una vez que conocemos ese error, simplemente se va corrigiendo poco a poco hasta que este error sea prácticamente inexistente. Cuando estamos perfectamente alineados con el punto, ya podemos ir hacia él
 
 ![image](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/1c9cd2d2-e767-4919-8bbb-28aec2ac7e9c)
 
@@ -146,7 +147,7 @@ def get_angular_error(target_x, target_y):
     return error
 ```
 
-* **Distancia**: para saber la distanca tambien he usado una teorema metematico y es el caso del teorema de pitragoras. Con este teorema posdemos sacar los conocidos como catetos que son la diferencia en x y en y de los puntos, para posterirmente obtener la hipotenusa, que en este caso es la distancia entre puntos. Con esto ya somos capaces de saber la distancia a la que estamos, y si hemos alcanzado el objetivo. En caso que alcancemos el objetivo, iremos a por el siguiente.
+* **Distancia**: Para determinar la distancia, también he utilizado un teorema matemático, en este caso, el teorema de Pitágoras. Con este teorema, podemos calcular los llamados catetos, que son la diferencia en x y en y de los puntos, para posteriormente obtener la hipotenusa, que en este caso es la distancia entre puntos. Con esto, ya somos capaces de saber la distancia a la que estamos y si hemos alcanzado el objetivo. En caso de que alcancemos el objetivo, iremos a por el siguiente.
 
 ![image](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/95134e4e-b381-4fda-8726-2ccec6aa7c34)
 
@@ -166,7 +167,7 @@ def get_lineal_error(target_x, target_y):
 
 ## Problemas ⁉️​
 
-* **Cambio de cordenadas**: Durante la practica me he pasado varias horas para entender que el problema en ocasiones estaba en el uso incorrecto de las coordenadas. No solo las cordenadas del mapa son distintas a las del mundo, si no que tambien es necesario invertir las coordenadas del target ya que la x y la y etsan cambiadas. Para imprimir el path tambien he necesitado invertir cada x y cada y del path para que se *printeara* de forma correcta.
+* **Cambio de coordenadas**: Durante la práctica, he dedicado varias horas a entender que el problema, en ocasiones, estaba en el uso incorrecto de las coordenadas. No solo las coordenadas del mapa son distintas a las del mundo, sino que también es necesario invertir las coordenadas del objetivo, ya que la x y la y están intercambiadas. Para imprimir el camino, también he necesitado invertir cada x y cada y del camino para que se "printeara" de forma correcta.
 
 ```python
 # Invertir las cordenadas del target para pasarlos a cordenadas del mapa
@@ -178,9 +179,9 @@ target[0], target[1] = target[1], target[0]
   print_path = [(point[1], point[0]) for point in path]
 ```
 
-* **Limitacion de velocidad**: En esta practica, o por lo menos en mi caso, la velocidad en la que el coche alcanza el objetivo es muy lenta. Esto es devivido a que tiene que ir de punto a punto todo el rato y comprobar todo el rato la orientacion y la distancia. Esto se ve afcectado ya que cuando llega al punto hace una pequeña pausa para orientarse. La parte buena de esto es que es muy robusto y nunca se sale de las lineas y siempre llega al objetivo
+* **Limitación de velocidad**: En esta práctica, o al menos en mi caso, la velocidad a la que el coche alcanza el objetivo es muy lenta. Esto se debe a que tiene que ir de punto a punto todo el tiempo y comprobar continuamente la orientación y la distancia. Esto se ve afectado, ya que cuando llega al punto, hace una pequeña pausa para orientarse. La parte positiva de esto es que es muy robusto y nunca se sale de las líneas, siempre llegando al objetivo.
 
-* **Cercania a los muros**: Como en cualquier algortimo de navegacion profesional el robot es tratado como un punto pero no lo es. Este tiene unas dimensiones depesndiendo de cada robot y si lo trataramos como un punto sin hacer nada mas este rascaria con las paredes e intentaria siempre ir pegado a ellas. Para ello una buena tecnica es engordar los obstaculos. De esta forma salbamos las distancias entre los limites del coche y las paredes. Por ello he creado esta funcion para que reciva la lista de obstaculos y los aumente el factor deseado dependiendo del robot,
+* **Cercanía a los muros**: Como en cualquier algoritmo de navegación profesional, el robot es tratado como un punto, pero no lo es. Este tiene unas dimensiones dependiendo de cada robot y, si lo tratáramos como un punto sin hacer nada más, rasparía con las paredes e intentaría siempre ir pegado a ellas. Para ello, una buena técnica es engordar los obstáculos. De esta forma, salvamos las distancias entre los límites del coche y las paredes. Por ello, he creado esta función para que reciba la lista de obstáculos y los aumente el factor deseado dependiendo del robot.
   
 ```python
 #Retorna la misma lista que de le proporciona pero con los objetos engordados

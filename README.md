@@ -25,7 +25,13 @@ Parsaber por donde tenemos que ir es muy sencillo una vez tenemos el gradiente, 
 
 Una vez ya tenemos el path la navegacion es realivamente sencilla. La tecnica que he usado a sido ir recorriendo el path punto por punto para ir de uno a otro, es decir, voy del punto A al punto B y cuando ya estoy en B voy al C y asi sucesibamente hasta llegar al objetivio. Para ir de un punto a otro, primero me he centrado en la orientacion. 
 
-* Orientacion: 
+* **Orientacion**: Para abrodar el tema de la orientacion he usado la arcontangente que relaciona el angulo del coche respecto del siguiente punto. Y una vez sabiendo ese error, simplemete se va corrigiendo poco a poco hasta que este error sea practicamete inexistente. Cuando estatmos perfectamenete alineados con el punto ya podemos ir hacia el.
+
+![image](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/1f2d3a39-d89c-4d8b-af96-75f9da00afb9)
+
+* **Distancia**: para saber la distanca tambien he usado una teorema metematico y es el caso del teorema de pitragoras. Con este teorema posdemos sacar los conocidos como catetos que son la diferencia en x y en y de los puntos, para posterirmente obtener la hipotenusa, que en este caso es la distancia entre puntos. Con esto ya somos capaces de saber la distancia a la que estamos, y si hemos alcanzado el objetivo. En caso que alcancemos el objetivo, iremos a por el siguiente.
+
+![image](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/95134e4e-b381-4fda-8726-2ccec6aa7c34)
 
 
 ## Demostración

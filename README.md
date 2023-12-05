@@ -18,14 +18,14 @@ Pero a esto hay que añadirle una complicación, ya que en la vida real, el mund
 ## Algoritmo de búsqueda 🔍
 Como algoritmo de búsqueda en este caso, he usado A* (A estrella), que es uno de los más potentes junto a Dijkstra. Lo que hace mi algoritmo es:
 
-*Inicialización:
+* Inicialización:
 El bucle while priority_queue: indica que continuará hasta que la cola de prioridad esté vacía.
 cost, current = heapq.heappop(priority_queue): Extrae el nodo con el menor costo actual de la cola de prioridad.
 
-*Condición de Finalizacion:
+* Condición de Finalizacion:
 if current == start: break: Si el nodo actual es el nodo de inicio, se rompe el bucle, indicando que se ha encontrado la ruta.
 
-*Manejo de Nodos Visitados:
+* Manejo de Nodos Visitados:
 if visited[current]: continue: Si el nodo actual ya ha sido visitado, se ignora y se pasa al siguiente.
 
 * Actualización de Nodos Visitados:

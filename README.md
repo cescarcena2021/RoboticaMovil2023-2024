@@ -207,7 +207,7 @@ def expand_obstacles(obstacle_list, expansion_range, map_shape):
 
 Video en velocidad x2
 
-[Screencast from 12-05-2023 09:02:56 PM.webm](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/91bbc672-0a10-45b6-9de3-03116194d867)
+[Video de demostración](https://github.com/cescarcena2021/RoboticaMovil2023-2024/assets/102520602/91bbc672-0a10-45b6-9de3-03116194d867)
 
 
 
